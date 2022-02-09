@@ -1,26 +1,81 @@
-function App() {
-const initialState = [
-{ id: 1, text: "good morning" },
-{ id: 2, text: "good afternoon" },
-{ id: 3, text: "good evening" },
-];
-const [state, changeState] = React.useState(initialState);
+function AddMovie(props){
 
+const [name,setName]=React.useState("");
+
+function handleChange(e){
+setName(e.target.value);
+}
+function handleSubmit(e){
+e.preventDefault();
+props.onAdd(name);
+setName("");
+}
+
+return(<form onSubmit={handleSubmit}>
+    <input type="text" value={name} onChange={handleChange} />
+    <input type="submit" value="Add item " />
+</form>)
+
+}
+
+function MovieList(props){
+
+function handleDelete(id){
+props.onDelete(id);
+}
 return (
 <div>
     <ul>
-        {state.map(function (item) {
+        {props.movies.map(function (item) {
         return (
         <li key={item.id}>{""}
-            {item.id} {""}
             {item.text} {""}
-            <button>Delete</button>
+            <button onClick={ ()=> handleDelete(item.id)}>Delete</button>
         </li>
         );
         })}
     </ul>
 </div>
 );
+
+}
+
+
+function App() {
+const initialState = [
+{ id: 1, text: "good morning" },
+{ id: 2, text: "good afternoon" },
+{ id: 3, text: "good evening" },
+];
+const [movies, setMovies] = React.useState(initialState);
+
+function handleDelete(id){
+setMovies((prev)=>{
+const items=prev.filter((i) => i.id != id);
+return items
+});
+
+}
+
+function handleAddMovie(name){
+const movie={
+id:new Date().getTime(),
+text:name,
+}
+const movieList=[...initialState];
+movieList.push(movie);
+setMovies(movieList);
+}
+
+
+return(
+<div>
+    <AddMovie onAdd={handleAddMovie} />
+    <MovieList movies={movies} onDelete={handleDelete} />
+</div>
+)
+
+
 }
 ReactDOM.render(
 <App />, document.querySelector('#app'));
