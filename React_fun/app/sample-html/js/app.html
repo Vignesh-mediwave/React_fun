@@ -1,0 +1,26 @@
+function App() {
+const initialState = [
+{ id: 1, text: "good morning" },
+{ id: 2, text: "good afternoon" },
+{ id: 3, text: "good evening" },
+];
+const [state, changeState] = React.useState(initialState);
+
+return (
+<div>
+    <ul>
+        {state.map(function (item) {
+        return (
+        <li key={item.id}>{""}
+            {item.id} {""}
+            {item.text} {""}
+            <button>Delete</button>
+        </li>
+        );
+        })}
+    </ul>
+</div>
+);
+}
+ReactDOM.render(
+<App />, document.querySelector('#app'));
