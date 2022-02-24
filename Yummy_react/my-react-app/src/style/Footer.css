@@ -1,0 +1,27 @@
+.footer-one {
+  background-color: #17285a;
+}
+.footer-two {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
+.yum {
+  fill: white;
+}
+.link a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+}
+.social-logo .logo {
+  margin-right: 10px;
+}
+
+.footer-last {
+  color: white;
+  text-align: center;
+}
